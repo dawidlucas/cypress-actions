@@ -1,77 +1,68 @@
 name: Cypress Cloud
 
-on: 
+on:
   workflow_dispatch:
     inputs:
-       spec:
-          description: Run by cypress command line
-          default: cypress/e2e/*
+      spec:
+        description: Run by cypress command line
+        default: cypress/e2e/*
 
 jobs:
   cypress-e2e-electron:
     runs-on: ubuntu-latest
     container:
-     image: cypress/browsers:node18.12.0-chrome103-ff107
-     options: --user 1001
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      options: --user 1001
     steps:
-      - name: Get code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: cypress run
-        uses: cypress-io/github-action@v6.5.0
+      - uses: cypress-io/github-action@v6.5.0
         with:
           install-command: yarn install
           browser: electron
           record: true
           group: UI Electron
           spec: ${{ github.event.inputs.spec }}
+          ci-build-id: ${{ github.run_id }}
         env:
-          CYPRESS_RECORD_KEY: 68a7e5ee-5387-4b1e-918b-77fece4cee59
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
   cypress-e2e-chrome:
     needs: cypress-e2e-electron
     runs-on: ubuntu-latest
     container:
-     image: cypress/browsers:node18.12.0-chrome103-ff107
-     options: --user 1001
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      options: --user 1001
     steps:
-      - name: Get code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: cypress run
-        uses: cypress-io/github-action@v6.5.0
+      - uses: cypress-io/github-action@v6.5.0
         with:
           install-command: yarn install
           browser: chrome
           record: true
           group: UI Chrome
           spec: ${{ github.event.inputs.spec }}
+          ci-build-id: ${{ github.run_id }}
         env:
-          CYPRESS_RECORD_KEY: 68a7e5ee-5387-4b1e-918b-77fece4cee59
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
   cypress-e2e-firefox:
     needs: cypress-e2e-electron
     runs-on: ubuntu-latest
     container:
-     image: cypress/browsers:node18.12.0-chrome103-ff107
-     options: --user 1001
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      options: --user 1001
     steps:
-      - name: Get code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: cypress run
-        uses: cypress-io/github-action@v6.5.0
+      - uses: cypress-io/github-action@v6.5.0
         with:
           install-command: yarn install
           browser: firefox
           record: true
           group: UI Firefox
           spec: ${{ github.event.inputs.spec }}
+          ci-build-id: ${{ github.run_id }}
         env:
-          CYPRESS_RECORD_KEY: 68a7e5ee-5387-4b1e-918b-77fece4cee59
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      
-            
-  
-              
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
