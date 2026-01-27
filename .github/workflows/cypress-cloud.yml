@@ -28,7 +28,7 @@ jobs:
           ci-build-id: ${{ github.run_id }}
           
         env:
-         CYPRESS_RECORD_KEY: 68a7e5ee-5387-4b1e-918b-77fece4cee59
+         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   cypress-e2e-chrome:
@@ -51,7 +51,7 @@ jobs:
           ci-build-id: ${{ github.run_id }}
          
         env:
-          CYPRESS_RECORD_KEY: 68a7e5ee-5387-4b1e-918b-77fece4cee59
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   cypress-e2e-firefox:
@@ -74,5 +74,5 @@ jobs:
           ci-build-id: ${{ github.run_id }}
          
         env:
-          CYPRESS_RECORD_KEY: 68a7e5ee-5387-4b1e-918b-77fece4cee59
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
