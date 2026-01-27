@@ -23,7 +23,7 @@ jobs:
           record: true
           group: UI Electron
           spec: ${{ github.event.inputs.spec }}
-          ci-build-id: ${{ github.run_id }}
+          
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
@@ -43,7 +43,7 @@ jobs:
           record: true
           group: UI Chrome
           spec: ${{ github.event.inputs.spec }}
-          ci-build-id: ${{ github.run_id }}
+         
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
@@ -63,6 +63,6 @@ jobs:
           record: true
           group: UI Firefox
           spec: ${{ github.event.inputs.spec }}
-          ci-build-id: ${{ github.run_id }}
+         
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
